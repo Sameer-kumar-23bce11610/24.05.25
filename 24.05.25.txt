@@ -3,14 +3,12 @@ import java.sql.*;
 
 public class DB_Connection {
     public static void main(String[] args) {
-        // Basic connection test
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/vit", "root", "root");
             System.out.println("Connection established: " + con);
             
-            // Query execution example
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select * from student");
             
