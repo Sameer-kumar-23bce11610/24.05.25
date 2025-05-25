@@ -1,0 +1,44 @@
+package crud_operation;
+import java.sql.*;
+
+public class DB_Connection {
+    public static void main(String[] args) {
+        // Basic connection test
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/vit", "root", "root");
+            System.out.println("Connection established: " + con);
+            
+            // Query execution example
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from student");
+            
+            while(rs.next()) {
+                System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getInt(3));
+            }
+            
+            con.close();
+        }
+        catch(Exception e) {
+            System.out.println("Sorry for inconvenience, please check the credentials");
+            System.out.println(e);
+        }
+        
+        
+        DB_Connection obj_DB_Connection = new DB_Connection();
+        System.out.println("Alternative connection: " + obj_DB_Connection.get_connection());
+    }
+    
+    public Connection get_connection() {
+        Connection connection = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/vit", "root", "root");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return connection;
+    }
+}
